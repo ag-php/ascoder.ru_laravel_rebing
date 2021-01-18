@@ -14,7 +14,23 @@ const routes = [
     children: [
       {
         path: '',
+        name: 'Admin',
         component: () => import(/* webpackChunkName: "admin" */'@/views/admin/Index')
+      },
+      {
+        path: 'posts',
+        name: 'AdminPosts',
+        component: () => import(/* webpackChunkName: "admin" */'@/views/admin/AdminPosts')
+      },
+      {
+        path: 'categories',
+        name: 'AdminCategories',
+        component: () => import(/* webpackChunkName: "admin" */'@/views/admin/AdminCategories')
+      },
+      {
+        path: 'tags',
+        name: 'AdminTags',
+        component: () => import(/* webpackChunkName: "admin" */'@/views/admin/AdminTags')
       }
     ]
   },
