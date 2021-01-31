@@ -10,5 +10,12 @@ Homestead.yaml
 npm-debug.log
 yarn-error.log
 
-/public
+/public/css
+/public/js
+/public/svg
+/public/.htaccess
+/public/index.php
+/public/mix-manifest.json
+/public/web.config
+
 d.sql
