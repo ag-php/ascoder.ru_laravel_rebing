@@ -96,11 +96,13 @@ return [
     'schemas' => [
         'default' => [
             'query' => [
-
+                'Category' => \App\GraphQL\Queries\Category\CategoryQuery::class,
+                'CategoryList' => \App\GraphQL\Queries\Category\CategoryListQuery::class,
+                'Post' => \App\GraphQL\Queries\Post\PostQuery::class,
+                'PostList' => \App\GraphQL\Queries\Post\PostListQuery::class,
             ],
             'mutation' => [
                 'Login' => \App\GraphQL\Mutations\Login::class,
-
             ],
             'middleware' => [],
             'method'     => ['get', 'post'],
@@ -110,7 +112,10 @@ return [
                 'CurrentUser' => \App\GraphQL\Queries\CurrentUserQuery::class,
             ],
             'mutation' => [
-                // 'example_mutation'  => ExampleMutation::class,
+                'CategoryPush' => \App\GraphQL\Mutations\Category\CategoryPush::class,
+                'CategoryDelete' => \App\GraphQL\Mutations\Category\CategoryDelete::class,
+                'PostPush' => \App\GraphQL\Mutations\Post\PostPush::class,
+                'PostDelete' => \App\GraphQL\Mutations\Post\PostDelete::class,
             ],
             'middleware' => ['auth:api'],
             'method'     => ['get', 'post'],
@@ -127,8 +132,11 @@ return [
     // ]
     //
     'types' => [
-        'Login' => \App\GraphQL\Types\LoginType::class,
         'User' => \App\GraphQL\Types\UserType::class,
+        'Login' => \App\GraphQL\Types\LoginType::class,
+        'Success' => \App\GraphQL\Types\SuccessType::class,
+        'Category' => \App\GraphQL\Types\Category\CategoryType::class,
+        'Post' => \App\GraphQL\Types\Post\PostType::class,
     ],
 
     // The types will be loaded on demand. Default is to load all types on each request

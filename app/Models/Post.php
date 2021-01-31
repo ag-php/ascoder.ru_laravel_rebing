@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Post
- * 
+ *
  * @property int $id
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
@@ -19,8 +19,10 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $slug
  * @property string $name
  * @property string $text
+ * @property string $image
+ * @property string $description
  * @property bool $active
- * 
+ *
  * @property Category $category
  *
  * @package App\Models
@@ -39,7 +41,9 @@ class Post extends Model
 		'slug',
 		'name',
 		'text',
-		'active'
+		'active',
+		'image',
+		'description'
 	];
 
 	public function category()
