@@ -12,12 +12,8 @@ yarn-error.log
 
 /public/css/
 /public/js/
-/public/svg/
 /public/fonts/
-/public/.htaccess
-/public/index.php
 /public/mix-manifest.json
-/public/web.config
 
 .idea
 .vscode
