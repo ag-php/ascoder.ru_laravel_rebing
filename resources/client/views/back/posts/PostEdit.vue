@@ -1,5 +1,5 @@
 <template>
-  <div>Пост {{ post.name }}</div>
+  <div>Пост: <b>{{ post.name }}</b></div>
   <hr>
   <form>
     <div class="form-check">

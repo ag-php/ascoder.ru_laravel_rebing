@@ -4,8 +4,8 @@
       <a href="/" class="logo">
         <div class="img"></div>
       </a>
-      <div v-if="!user" class="logo-label">personal codebook</div>
-      <router-link v-else class="logo-label" to="/back">personal codebook</router-link>
+      <div v-if="!user" class="logo-label">personal codebook blog</div>
+      <router-link v-else class="logo-label" to="/back">personal codebook blog</router-link>
     </header>
     <SearchBlock/>
     <main>
@@ -62,7 +62,7 @@ export default {
 
     .logo-label {
       font-family: 'Coda Caption', sans-serif;
-      color: #0071bc;
+      color: #535c69;
     }
   }
 

@@ -21,8 +21,8 @@ query ($slug: String!){
 `
 
 export const POST_LIST = gql`
-query ($page: Int!, $size: Int!){
-  PostList (page: $page, size: $size) {
+query ($page: Int!, $size: Int!, $category: String){
+  PostList (page: $page, size: $size, category: $category) {
     total
     data {
       id
@@ -35,6 +35,7 @@ query ($page: Int!, $size: Int!){
       active
       categoryId
       category {
+        slug
         name
       }
     }

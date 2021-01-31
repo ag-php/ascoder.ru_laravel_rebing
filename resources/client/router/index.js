@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
 import Home from '@/views/front/Home'
+import CategoryPosts from '@/views/front/CategoryPosts'
 import Post from '@/views/front/Post'
 import FrontContainer from '@/base/layout/front/FrontContainer'
 
@@ -13,6 +14,12 @@ const routes = [
         path: '',
         name: 'Home',
         component: Home
+      },
+      {
+        props: true,
+        path: ':category',
+        name: 'CategoryPosts',
+        component: CategoryPosts
       },
       {
         props: true,

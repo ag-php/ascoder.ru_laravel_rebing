@@ -1,10 +1,22 @@
 <template>
-  <div>Категория {{ category.name }}</div>
+  <div>Категория: <b>{{ category.name }}</b></div>
   <hr>
-  <input type="text" v-model="category.slug"/>
-  <input type="text" v-model="category.name"/>
-  <input type="checkbox" :checked="category.active" @input="category.active =! category.active"/>
-  <button @click="push">Сохранить</button>
+  <form>
+    <div class="form-check">
+      <input type="checkbox" class="form-check-input" id="postActive" :checked="category.active" @input="category.active =! category.active">
+      <label class="form-check-label" for="postActive">Активна</label>
+    </div>
+    <div class="form-group">
+      <label for="postName">Название</label>
+      <input type="text" class="form-control" id="postName" v-model="category.name">
+    </div>
+    <div class="form-group">
+      <label for="postSlug">slug</label>
+      <input type="text" class="form-control" id="postSlug" v-model="category.slug">
+    </div>
+    <hr>
+    <button class="btn btn-primary btn-sm" @click="push">Сохранить</button>
+  </form>
 </template>
 
 <script>

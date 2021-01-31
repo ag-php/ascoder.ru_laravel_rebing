@@ -4,6 +4,7 @@ namespace App\GraphQL\Queries\Post;
 
 use App\Models\Post;
 use GraphQL\Type\Definition\Type;
+use Illuminate\Database\Eloquent\Builder;
 use Rebing\GraphQL\Support\Facades\GraphQL;
 use Rebing\GraphQL\Support\Query;
 
@@ -25,6 +26,10 @@ class PostListQuery extends Query
                 'name' => 'size',
                 'type' => Type::nonNull(Type::int())
             ],
+            'category' => [
+                'name' => 'category',
+                'type' => Type::string()
+            ],
         ];
     }
 
@@ -33,11 +38,19 @@ class PostListQuery extends Query
         $page = $args['page'];
         $size = $args['size'];
 
+        $category = isset($args['category']) ? $args['category'] : null;
+
+
         $posts = Post::query()
             ->with('category')
-            ->orderByDesc('created_at')
-            ->paginate($size, ['*'], 'page', $page);
+            ->orderByDesc('created_at');
 
-        return $posts;
+        if ($category) {
+            $posts->whereHas('category', function (Builder $q) use ($category) {
+                $q->where('slug', $category);
+            });
+        }
+
+        return $posts->paginate($size, ['*'], 'page', $page);
     }
 }

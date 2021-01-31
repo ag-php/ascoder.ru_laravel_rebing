@@ -1,7 +1,7 @@
 <template>
   <div class="categories-block" v-if="categories.length">
     <div class="cats-title">Разделы</div>
-    <router-link class="category-link" to="/" v-for="c in categories">{{ c.name }}</router-link>
+    <router-link class="category-link" :to="{ name: 'CategoryPosts', params: { category: c.slug }}" v-for="c in categories">{{ c.name }}</router-link>
   </div>
 </template>
 

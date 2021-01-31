@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import { ref, onMounted } from 'vue'
+import { ref, watchEffect, computed } from 'vue'
 import { apolloClientNoAuth } from '@/base/apollo'
 import { POST_LIST } from '@/gql/post'
 import VIcon from '@/base/components/icon/VIcon'
@@ -24,11 +24,19 @@ import moment from 'moment'
 import Preloader from '@/base/components/preloader/Preloader'
 
 export default {
-  name: 'Home',
+  name: 'CategoryPosts',
   components: { Preloader, VIcon },
-  setup () {
+  props: {
+    category: {
+      type: String,
+      required: true
+    }
+  },
+  setup (props) {
     const loaded = ref(false)
     const posts = ref([])
+
+    const cat = computed(() => props.category)
 
     function fetch () {
       loaded.value = false
@@ -37,7 +45,8 @@ export default {
         fetchPolicy: 'cache-first',
         variables: {
           page: 1,
-          size: 10
+          size: 10,
+          category: cat.value
         }
       }).then(res => {
         const result = res.data.PostList
@@ -46,8 +55,10 @@ export default {
       })
     }
 
-    onMounted(() => {
-      fetch()
+    watchEffect(() => {
+      if (cat.value) {
+        fetch()
+      }
     })
 
     function formatDate (date) {

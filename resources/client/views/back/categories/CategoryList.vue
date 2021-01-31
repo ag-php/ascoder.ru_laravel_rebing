@@ -1,33 +1,33 @@
 <template>
   <Preloader v-if="loading"/>
   <div v-else>
-    <div>Категории [{{ total }}]</div>
+    <div>Категории: [{{ total }}]</div>
     <hr>
-    <router-link :to="{ name: 'CategoryEdit', params: { slug: 'add' }}">Добавить категорию</router-link>
+    <router-link class="btn btn-success btn-sm" :to="{ name: 'CategoryEdit', params: { slug: 'add' }}">Добавить категорию</router-link>
     <hr>
     <table class="table table-bordered table-sm">
       <thead class="thead-light">
       <tr>
+        <th></th>
         <th>ID</th>
-        <th>slug</th>
         <th>Название</th>
+        <th>slug</th>
         <th>Создана</th>
         <th>Обновлена</th>
         <th>Активна</th>
-        <th>#</th>
-        <th>#</th>
+        <th></th>
       </tr>
       </thead>
       <tbody>
       <tr v-for="c in categories">
+        <th><router-link :to="{ name: 'CategoryEdit', params: { slug: c.slug }}"><VIcon name="cilPencil"/></router-link></th>
         <td>{{ c.id }}</td>
-        <td>{{ c.slug }}</td>
         <td>{{ c.name }}</td>
+        <td>{{ c.slug }}</td>
         <td>{{ c.created_at }}</td>
         <td>{{ c.updated_at }}</td>
         <td>{{ c.active }}</td>
-        <th><router-link :to="{ name: 'CategoryEdit', params: { slug: c.slug }}">ред</router-link></th>
-        <th><a href="#" @click.prevent="del(c.id)">удал</a></th>
+        <th><a href="#" class="text-danger" @click.prevent="del(c.id)"><VIcon name="cilTrash"/></a></th>
       </tr>
       </tbody>
     </table>
@@ -39,10 +39,11 @@ import { ref, onMounted } from 'vue'
 import { apolloClient, apolloClientNoAuth } from '@/base/apollo'
 import { CATEGORY_LIST, CATEGORY_DELETE } from '@/gql/category'
 import Preloader from '@/base/components/preloader/Preloader'
+import VIcon from '@/base/components/icon/VIcon'
 
 export default {
   name: 'CategoryList',
-  components: { Preloader },
+  components: { VIcon, Preloader },
   setup () {
     const loading = ref(true)
     const total = ref(null)
