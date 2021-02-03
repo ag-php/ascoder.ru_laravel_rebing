@@ -1,15 +1,16 @@
 @import "node_modules/bootstrap/scss/bootstrap";
 
-@import url('https://fonts.googleapis.com/css2?family=Coda+Caption:wght@800&display=swap');
+@import "~highlight.js/scss/stackoverflow-light";
 
-@import "node_modules/highlight.js/scss/stackoverflow-light";
-
-html{
+html {
   height: 100%;
 }
 
 body {
-  font-family: "Inconsolata","SFMono-Regular",Consolas,"Liberation Mono",Menlo,Monaco,"Courier New",monospace;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 1rem;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -24,10 +25,6 @@ body {
 
 a {
   text-decoration: none;
-}
-
-input, textarea {
-  font-size: 12px !important;
 }
 
 .icon {
@@ -54,87 +51,3 @@ pre {
 .hljs {
   padding: 1rem;
 }
-
-//h1, h2, h3, h4, h5, h6 {
-//  color: black;
-//}
-//
-//h1 {
-//  font-size: 1.5rem;
-//}
-//
-//h2 {
-//  font-size: 1.4rem;
-//}
-//
-//h3 {
-//  font-size: 1.3rem;
-//}
-//
-//h4 {
-//  font-size: 1.2rem;
-//}
-//
-//h5 {
-//  font-size: 1.1rem;
-//}
-//
-//h6 {
-//  font-size: 1rem;
-//}
-//
-//table {
-//  font-size: 14px;
-//}
-//
-
-//
-//pre {
-//  display: block;
-//  margin-top: 0;
-//  margin-bottom: 1rem;
-//  overflow: auto;
-//  font-size: .8rem;
-//  line-height: 1.1;
-//}
-//
-//div.code {
-//  white-space: pre;
-//}
-//
-//.post-wrap {
-//  width: 100%;
-//}
-//
-//.post-block {
-//  width: 100%;
-//  padding: 1rem;
-//  margin-bottom: .5rem;
-//  border: 1px solid #ccc;
-//  background-color: white;
-//  .post-header {
-//    display: flex;
-//    color: #535c69;
-//    p {
-//      margin-left: 8px;
-//      font-size: 16px;
-//    }
-//    .cat-small {
-//      display: block;
-//      font-size: 12px;
-//      color: blue;
-//      margin: 4px 0 0 8px;
-//    }
-//  }
-//  .post-title {
-//    font-size: 1.5rem;
-//    a {
-//      color: #535c69;
-//      text-decoration: none;
-//      font-weight: 700;
-//      &:hover {
-//        color: black;
-//      }
-//    }
-//  }
-//}
