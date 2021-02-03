@@ -37,6 +37,10 @@ class CategoryType extends GraphQLType
             'active' => [
                 'type' => Type::boolean()
             ],
+
+            'posts_count' => [
+                'type' => Type::int()
+            ],
         ];
     }
 }

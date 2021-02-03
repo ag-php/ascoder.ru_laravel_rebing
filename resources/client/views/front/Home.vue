@@ -1,15 +1,17 @@
 <template>
   <Preloader v-if="!loaded"/>
-  <div class="post-wrap" v-else>
-    <div class="post-block" v-for="p in posts">
-      <div class="post-header">
-        <VIcon name="cilCalendar"/>
-        <p>{{ formatDate(p.created_at) }}</p>
-        <router-link class="cat-small" :to="{ name: 'CategoryPosts', params: { category: p.category.slug }}">{{ p.category.name }}</router-link>
-      </div>
-      <div class="post-body">
-        <div class="post-title"><router-link :to="{ name: 'Post', params: { slug: p.slug }}">{{ p.name }}</router-link></div>
-        <div class="post-text" v-html="p.description"></div>
+  <div v-else>
+    <div class="card mb-2" v-for="post in posts">
+      <div class="card-body">
+        <div class="text-muted h7 mb-2">
+          {{formatDate(post.created_at)}}
+          <span class="me-2">|</span>
+          <span>{{ post.category.name}}</span>
+        </div>
+        <router-link class="card-link" :to="{ name: 'Post', params: { slug: post.slug }}"><h5 class="card-title">{{ post.name }}</h5></router-link>
+        <p class="card-text">
+          {{ post.description }}
+        </p>
       </div>
     </div>
   </div>
@@ -19,13 +21,12 @@
 import { ref, onMounted } from 'vue'
 import { apolloClientNoAuth } from '@/base/apollo'
 import { POST_LIST } from '@/gql/post'
-import VIcon from '@/base/components/icon/VIcon'
 import moment from 'moment'
 import Preloader from '@/base/components/preloader/Preloader'
 
 export default {
   name: 'Home',
-  components: { Preloader, VIcon },
+  components: { Preloader },
   setup () {
     const loaded = ref(false)
     const posts = ref([])

@@ -1,8 +1,10 @@
 <template>
-  <div class="categories-block" v-if="categories.length">
-    <div class="cats-title">Разделы</div>
-    <router-link class="category-link" :to="{ name: 'CategoryPosts', params: { category: c.slug }}" v-for="c in categories">{{ c.name }}</router-link>
-  </div>
+  <ul class="list-group" v-if="categories.length">
+    <li v-for="category in categories" class="list-group-item">
+      <router-link :to="{ name: 'CategoryPosts', params: { category: category.slug }}">{{ category.name }}</router-link>
+      <span class="text-muted small float-end">{{ category.posts_count }}</span>
+    </li>
+  </ul>
 </template>
 
 <script>
@@ -38,33 +40,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-.categories-block {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  padding: 1rem;
-  background-color: white;
-  border: 1px solid #ccc;
-  .cats-title {
-    font-family: Verdana;
-    font-weight: 700;
-    color: #0071bc;
-    border-bottom: 1px solid #0071bc;
-    margin-bottom: 8px;
-  }
-  .category-link {
-    display: block;
-    width: 100%;
-    height: 50%;
-    color: #535c69;
-    font-family: Verdana;
-    font-weight: 700;
-    text-decoration: none;
-    &:hover {
-      color: black;
-    }
-  }
-}
-</style>

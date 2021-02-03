@@ -1,18 +1,17 @@
 <template>
   <Preloader v-if="!post"/>
-  <div class="post-wrap" v-else>
-  <div class="post-block">
-    <div class="post-header">
-      <VIcon name="cilCalendar"/>
-      <p>{{ formatDate(post.created_at) }}</p>
-      <div class="cat-small">{{ post.category.name }}</div>
-    </div>
-    <div class="post-body">
-      <h1 class="post-title">{{ post.name }}</h1>
+  <div v-else class="card mb-2">
+    <div class="card-body">
+      <div class="text-muted h7 mb-2">
+        {{formatDate(post.created_at)}}
+        <span class="me-2">|</span>
+        <span>{{ post.category.name}}</span>
+      </div>
+      <h1 class="card-title">{{ post.name }}</h1>
       <hr>
-      <div class="post-text" v-html="post.text"></div>
+      <div class="card-text" v-html="post.text">
+      </div>
     </div>
-  </div>
   </div>
 </template>
 
@@ -20,14 +19,16 @@
 import { ref, onMounted, nextTick } from 'vue'
 import { apolloClientNoAuth } from '@/base/apollo'
 import { POST } from '@/gql/post'
-import VIcon from '@/base/components/icon/VIcon'
 import moment from 'moment'
-import hljs from 'highlight.js'
 import Preloader from '@/base/components/preloader/Preloader'
+
+import hljs from 'highlight.js/lib/core'
+import java from 'highlight.js/lib/languages/java'
+hljs.registerLanguage('java', java)
 
 export default {
   name: 'Post',
-  components: { Preloader, VIcon },
+  components: { Preloader },
   props: {
     slug: {
       type: String,

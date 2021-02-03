@@ -1,7 +1,8 @@
 <template>
-  <div>Пост: <b>{{ post.name }}</b></div>
-  <hr>
-  <form>
+  <div class="small alert bg-light text-danger" v-if="error">{{ error }}</div>
+  <form @submit.prevent="push">
+    <div>Пост: <b>{{ post.name }}</b></div>
+    <hr>
     <div class="form-check">
       <input type="checkbox" class="form-check-input" id="postActive" :checked="post.active" @input="post.active =! post.active">
       <label class="form-check-label" for="postActive">Активен</label>
@@ -27,10 +28,10 @@
     <hr>
     <div class="form-group">
       <label for="postText">Текст</label>
-      <textarea class="form-control" id="postText" v-model="post.text" rows="10"></textarea>
+      <textarea class="form-control" id="postText" v-model="post.text" rows="25"></textarea>
     </div>
     <hr>
-    <button class="btn btn-primary btn-sm" @click="push">Сохранить</button>
+    <button type="submit" class="btn btn-primary btn-sm">Сохранить</button>
   </form>
 </template>
 
@@ -47,6 +48,8 @@ export default {
     const route = useRoute()
     const router = useRouter()
 
+    const error = ref(null)
+
     const post = reactive({
       slug: null,
       name: null,
@@ -57,6 +60,7 @@ export default {
     })
 
     function fetch () {
+      error.value = null
       apolloClientNoAuth.query({
         query: POST,
         fetchPolicy: 'no-cache',
@@ -71,12 +75,15 @@ export default {
         post.description = result.description
         post.active = result.active
         post.categoryId = result.categoryId
+      }).catch(e => {
+        error.value = e
       })
     }
 
     const categories = ref([])
 
     function fetchCategories () {
+      error.value = null
       apolloClientNoAuth.query({
         query: CATEGORY_LIST,
         fetchPolicy: 'no-cache',
@@ -88,15 +95,20 @@ export default {
         categories.value = res.data.CategoryList.data.map(x => {
           return { label: x.name, value: x.id }
         })
+      }).catch(e => {
+        error.value = e
       })
     }
 
     function push () {
+      error.value = null
       apolloClient.mutate({
         mutation: POST_PUSH,
         variables: post
       }).then(() => {
-        router.back()
+        router.push({ name: 'PostList' })
+      }).catch(e => {
+        error.value = e.graphQLErrors.map(x => x.message)
       })
     }
 
@@ -109,6 +121,7 @@ export default {
     })
 
     return {
+      error,
       categories,
       post,
       push

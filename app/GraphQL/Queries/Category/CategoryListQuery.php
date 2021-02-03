@@ -33,7 +33,9 @@ class CategoryListQuery extends Query
         $page = $args['page'];
         $size = $args['size'];
 
-        $categories = Category::query()->paginate($size, ['*'], 'page', $page);
+        $categories = Category::query()
+            ->withCount('posts')->orderBy('posts_count', 'desc')
+            ->paginate($size, ['*'], 'page', $page);
 
         return $categories;
     }

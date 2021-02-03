@@ -1,7 +1,5 @@
 <template>
-  <div class="search-block">
-    <input type="text" class="form-control" placeholder="Что найти?" v-model="search"/>
-  </div>
+  <input type="text" class="form-control" placeholder="Что найти?" v-model="search"/>
 </template>
 
 <script>
@@ -36,16 +34,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-.search-block {
-  width: 100%;
-  padding: 1rem;
-  border-bottom: 1px solid #0071bc;
-  .search-field {
-    display: block;
-    width: 100%;
-    color: #ccc;
-  }
-}
-</style>
